@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Home page.
+{% endblock %}
+
+
+{% block content %}
+<h1>Home page.</h1>
+
+<pre>
+<b>Todolists:</b>
+{% for todolist in todolists %}
+ - {{todolist}} <a href="{% url 'main:main-todolist-show_items' todolist.id %}">link</a>
+{% endfor %}
+</pre>
+
+{% endblock %}
