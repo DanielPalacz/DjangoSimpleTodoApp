@@ -9,17 +9,24 @@ Home page.
 
 <p>
 <b>'{{todolist}}' items:</b> <br>
-{% for item in todolist_items %}
+
+<form method="post" action="#">
+      {% csrf_token %}
+
+  {% for item in todolist_items %}
 
   {% if item.complete == True %}
-  - {{item}} [COMPLETE]
+  <input type="checkbox" value="clicked" name="c{{item.id}}" checked></input> {{item}} [COMPLETE]
   {% else %}
-  - {{item}} [INCOMPLETE]
+  <input type="checkbox" value="clicked" name="c{{item.id}}"></input> {{item}} [INCOMPLETE]
   {% endif %}
 
  <br>
 {% endfor %}</p>
 
-
+<button type="submit" name="save" value="save">Save</button>
+<input type="text" name="new"></input>
+<button type="submit" name="addItem" value="addItem">Add item</button>
+</form>
 
 {% endblock %}
