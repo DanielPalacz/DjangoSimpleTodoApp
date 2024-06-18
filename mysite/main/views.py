@@ -9,11 +9,27 @@ def todolist_index(request):
 
 
 def todolist_show_items(request, pk):
-    try:
-        todolist = ToDoList.objects.get(id=pk)
-        todolist_items = todolist.item_set.all()
-    except (ToDoList.DoesNotExist, Item.DoesNotExist) as e:
-        return HttpResponse(f"<h1>Lack of Todolist number: {pk}. <br>Exception details: {e.args}</h1>")
+    todolist = ToDoList.objects.get(id=pk)
+    todolist_items = todolist.item_set.all()
+
+    if request.method == "POST":
+        print(request.POST)
+
+        if request.POST.get("save"):
+
+            for item in todolist_items:
+                if request.POST.get(f"c{item.id}") == "clicked":
+                    item.complete = True
+                else:
+                    item.complete = False
+                item.save()
+
+        elif request.POST.get("addItem"):
+            item_text = request.POST.get("newItem")
+            if len(item_text) > 3:
+                todolist.item_set.create(text=item_text, complete=False)
+            else:
+                print("Invalid something")
 
     return render(request, "main/todolist_items.html",
                   {"todolist": todolist, "todolist_items": todolist_items})

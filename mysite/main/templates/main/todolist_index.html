@@ -6,13 +6,25 @@ Home page.
 
 
 {% block content %}
-<h1>Home page.</h1>
 
-<pre>
-<b>Todolists:</b>
+
+<table>
+  <tr>
+    <th>Todolist name</th>
+    <th>Todolist items</th>
+  </tr>
+
 {% for todolist in todolists %}
- - {{todolist}} <a href="{% url 'main:main-todolist-show_items' todolist.id %}">items</a>
-{% endfor %}
-</pre>
+<tr><td>{{todolist}}</td><td><a href="{% url 'main:main-todolist-show_items' todolist.id %}">items</a></td></tr>
+
+ {% endfor %}
+
+</table>
+
+
+
+<br></br>
+<br></br>
+<a href="{% url 'main:main-todolist-create' %}">Create new Todolist</a>
 
 {% endblock %}

@@ -13,19 +13,31 @@ Home page.
 <form method="post" action="#">
       {% csrf_token %}
 
+<table>
+  <tr>
+    <th>Is completed?</th>
+    <th>Item content</th>
+  </tr>
   {% for item in todolist_items %}
 
   {% if item.complete == True %}
-  <input type="checkbox" value="clicked" name="c{{item.id}}" checked></input> {{item}} [COMPLETE]
+  <tr>
+    <td><input type="checkbox" value="clicked" name="c{{item.id}}" checked></input></td>
+    <td>{{item}}</td>
+  </tr>
   {% else %}
-  <input type="checkbox" value="clicked" name="c{{item.id}}"></input> {{item}} [INCOMPLETE]
+  <tr>
+    <td><input type="checkbox" value="clicked" name="c{{item.id}}"></input></td>
+    <td>{{item}}</td>
+  </tr>
   {% endif %}
-
- <br>
 {% endfor %}</p>
+</table>
+
+</br>
 
 <button type="submit" name="save" value="save">Save</button>
-<input type="text" name="new"></input>
+<input type="text" name="newItem"></input>
 <button type="submit" name="addItem" value="addItem">Add item</button>
 </form>
 
