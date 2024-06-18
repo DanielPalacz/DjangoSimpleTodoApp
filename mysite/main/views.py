@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from .models import ToDoList, Item
+from .forms import CreateNewList
 
 
 def todolist_index(request):
@@ -16,3 +17,19 @@ def todolist_show_items(request, pk):
 
     return render(request, "main/todolist_items.html",
                   {"todolist": todolist, "todolist_items": todolist_items})
+
+
+def todolist_create(request):
+
+    if request.method == "POST":
+        form = CreateNewList(request.POST)
+        if form.is_valid():
+            tdl_name = form.cleaned_data["name"]
+            tdl = ToDoList(name=tdl_name)
+            tdl.save()
+            return HttpResponseRedirect(f"/{tdl.id}")
+
+    else:
+        form = CreateNewList()
+
+    return render(request, "main/todolist_create.html", {"form": form})

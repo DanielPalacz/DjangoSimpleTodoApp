@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Create new todolist.
+{% endblock %}
+
+{% block content %}
+<h1>Create new todolist.</h1>
+
+<form method="post" action="/create/">
+    {% csrf_token %}
+    {{form.as_p}}
+    <br></br>
+    <button type="submit" name="save">Create</button>
+</form>
+
+
+{% endblock %}

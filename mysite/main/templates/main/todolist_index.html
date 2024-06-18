@@ -11,7 +11,7 @@ Home page.
 <pre>
 <b>Todolists:</b>
 {% for todolist in todolists %}
- - {{todolist}} <a href="{% url 'main:main-todolist-show_items' todolist.id %}">link</a>
+ - {{todolist}} <a href="{% url 'main:main-todolist-show_items' todolist.id %}">items</a>
 {% endfor %}
 </pre>
 
