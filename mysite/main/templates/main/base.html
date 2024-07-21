@@ -58,8 +58,14 @@
     </div>
 
     <div id="content", name="content", class="main">
-      {% block content %}
-      {% endblock %}
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h1 class="mt-2">My TODO application site.</h1>
+          <hr class="mt-0 mb-4"></hr>
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
     </div>
 
     <!-- Optional JavaScript -->
