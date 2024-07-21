@@ -1,10 +1,20 @@
 {% extends 'main/base.html' %}
 
 
-    {% block title %}TODO home page.{% endblock %}
+    {% block title %}TODO app home page.{% endblock %}
 
     {% block content %}
-        <h1>TODO home page.</h1>
+        <h1>Todo app home page.</h1><br>
 
-        {{name}}
+        <u><h1>1) All todo lists:</h1></u>
+
+        <ul>
+        {% for todolist in todolists %}
+            <li>{{todolist}} (<a href="{% url 'index' todolist.id %}">/{{todolist.id}}</a>) </li>
+        {% endfor %}
+        </ul>
+
+    <br></br>
+    <h3><a href="{% url 'create' %}">2) Create new todo list.</a></h3>
+
     {% endblock %}
